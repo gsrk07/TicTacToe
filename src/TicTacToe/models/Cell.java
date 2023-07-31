@@ -9,11 +9,27 @@ public class Cell {
 
     private Player player;
 
-    public Cell(int row, int col, CellState cellState, Player player) {
+    // NOT USING THIS GENERAL CONSTRUCTOR
+//    public Cell(int row, int col, CellState cellState, Player player) {
+//        this.row = row;
+//        this.col = col;
+//        this.cellState = cellState;
+//        this.player = player;
+//    }
+
+
+    // when we create a new cell, the state of cell will be EMPTY initally
+    public Cell(int row, int col) {
         this.row = row;
         this.col = col;
-        this.cellState = cellState;
+        this.cellState = CellState.EMPTY;
+    }
+
+    public Cell(int row, int col, Player player) {
+        this.row = row;
+        this.col = col;
         this.player = player;
+        this.cellState = CellState.FILLED;
     }
 
     // WHEN WE DISPLAY THE BOARD, WE ARE DISPLAYING A GROUP OF CELLS. SO WE NEED A DISPLAY METHOD IN A CELL
@@ -21,13 +37,13 @@ public class Cell {
     public void display(){
 
         if(player == null) {
-            System.out.println("| |");
+            System.out.print("| |");
         }
         else if (cellState.equals(CellState.BLOCKED)){
-            System.out.println(" |||| ");
+            System.out.print(" |||| ");
         }
         else {
-            System.out.println(" | " + player.getSymbol().getSymbol() + " | ");
+            System.out.print(" | " + player.getSymbol().getSymbol() + " | ");
         }
     }
     public int getRow() {

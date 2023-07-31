@@ -1,5 +1,8 @@
 package TicTacToe.models;
 
+import TicTacToe.exceptions.InvalidColumnValueException;
+import TicTacToe.exceptions.InvalidRowValueException;
+
 import java.util.Scanner;
 
 public class Player {
@@ -31,8 +34,16 @@ public class Player {
 
         // TO DO is to validate the move and throw exception or message
 
+        if(row < 1 || row >= board.size) {
+            throw new InvalidRowValueException("Please enter row value greater than 0 and less than " + board.size);
+        }
 
+        if(col < 1 || col >= board.size) {
+            throw new InvalidColumnValueException("Please enter col value greater than 0 and less than " + board.size);
+        }
 
+        // we need to return the new cell which takes row, col and current player.
+        return new Move(new Cell(row,col,this),this);
     }
     public String getName() {
         return name;
