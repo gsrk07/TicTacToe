@@ -33,20 +33,30 @@ public class Game {
     // here stateofgame, we will not pass in constructor, but have its value assigned as IN_PROGRESS.
 
     // we dont know which player will be the winner. Hence we will not pass winner.
+    // we dont need to pass the list of moves, and index of next player as well at the start of the game in constructor.
 
-    private Game(List<Player> players, Board board, /*Player Winner*/ List<Move> moves, int indexofnextplayertomove ,List<WinningStrategy> winningStrategyList) {
+    // also here we are saying users can choose which winning strategy they want to choose to decide the winner.
+
+    private Game(List<Player> players, Board board, /*Player Winner*/ /*List<Move> moves, int indexofnextplayertomove, */ List<WinningStrategy> winningStrategyList) {
         this.players = players;
         this.board = board;
-        //this.winner = winner;
+        //this.winner = winner; // cannot decide on winner in the initial setup time
         this.moves = new ArrayList<Move>();
-        this.statefgame = GameState.IN_PROGRESS;
+        this.statefgame = GameState.IN_PROGRESS; // initially whenever a game is created, it will be in progress.
         this.indexofnextplayertomove = 0; // initially would be 0
         this.winningStrategyList = winningStrategyList;
     }
 
+    // inside our parent class, as per builder pattern we make the builder method which will
+    // return a new Builder object. using this object, we start taking user inputs, i.e. thro setters
+    // and then call the build method.
+
+    public static Builder builder() {
+        return new Builder();
+    }
     // we will be using Builder class here.
 
-    public static class Builder{
+    public static class Builder {
 
         private List<Player> players;
         private List<WinningStrategy> winningstrategylist;
@@ -72,6 +82,7 @@ public class Game {
         }
 
         // we also give methods to add Player and Winning Strategy since both of them are list.
+        // and at a later stage before starting the game, we can add players.
 
         public void addPlayer(Player player) {
             players.add(player);
@@ -135,6 +146,19 @@ public class Game {
 
         }
 
+        // this is the validate method where we will perform all validations in the builder class
+        private void validate() {
+            validatebotcount();
+            validateDimensions();
+            validatenumberofplayers();
+            validateUniqueSymbolforAllPlayers();
+
+        }
+
+        private Game build(){
+            validate();
+            return new Game(players,new Board(dimensions),winningstrategylist);
+        }
 
     }
 
