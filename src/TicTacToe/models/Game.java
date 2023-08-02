@@ -4,6 +4,7 @@ import TicTacToe.exceptions.DuplicateSymbolException;
 import TicTacToe.exceptions.InvalidBotCountException;
 import TicTacToe.exceptions.InvalidDimensionException;
 import TicTacToe.exceptions.InvalidPlayersCountException;
+import TicTacToe.strategy.WinningStrategy.OrderOneWinningStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +24,7 @@ public class Game {
 
     private int indexofnextplayertomove;
 
-    private List<WinningStrategy> winningStrategyList;
+    private List<OrderOneWinningStrategy> winningStrategyList;
 
     // we know that we want to create the Game object only after we are done validation of the attributes.
     // we will use Builder design pattern to validate our attributes and then create our Game class object.
@@ -38,7 +39,7 @@ public class Game {
 
     // also here we are saying users can choose which winning strategy they want to choose to decide the winner.
 
-    private Game(List<Player> players, Board board, /*Player Winner*/ /*List<Move> moves, int indexofnextplayertomove, */ List<WinningStrategy> winningStrategyList) {
+    private Game(List<Player> players, Board board, /*Player Winner*/ /*List<Move> moves, int indexofnextplayertomove, */ List<OrderOneWinningStrategy> winningStrategyList) {
         this.players = players;
         this.board = board;
         //this.winner = winner; // cannot decide on winner in the initial setup time
@@ -60,13 +61,13 @@ public class Game {
     public static class Builder {
 
         private List<Player> players;
-        private List<WinningStrategy> winningstrategylist;
+        private List<OrderOneWinningStrategy> winningstrategylist;
         private int dimensions; // we need to validate the dimensions first before creating the board for the game.
 
         public Builder() {
             // would like to have initial default values only.
             this.players = new ArrayList<Player>();
-            this.winningstrategylist = new ArrayList<WinningStrategy>();
+            this.winningstrategylist = new ArrayList<OrderOneWinningStrategy>();
             this.dimensions = 0;
         }
 
@@ -74,7 +75,7 @@ public class Game {
             this.players = players;
         }
 
-        public void setWinningstrategylist(List<WinningStrategy> winningstrategylist) {
+        public void setWinningstrategylist(List<OrderOneWinningStrategy> winningstrategylist) {
             this.winningstrategylist = winningstrategylist;
         }
 
@@ -89,7 +90,7 @@ public class Game {
             players.add(player);
         }
 
-        public void addWinningStrategy(WinningStrategy winningStrategy){
+        public void addWinningStrategy(OrderOneWinningStrategy winningStrategy){
         winningstrategylist.add(winningStrategy);
         }
 
