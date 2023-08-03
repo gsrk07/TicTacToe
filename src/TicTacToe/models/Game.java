@@ -53,10 +53,39 @@ public class Game {
     // return a new Builder object. using this object, we start taking user inputs, i.e. thro setters
     // and then call the build method.
 
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public GameState getStatefgame() {
+        return statefgame;
+    }
+
+    public int getIndexofnextplayertomove() {
+        return indexofnextplayertomove;
+    }
+
+    public List<OrderOneWinningStrategy> getWinningStrategyList() {
+        return winningStrategyList;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
-    // we will be using Builder class here.
+    // we will be using Builder Design Pattern here,  since we want to validate our data first.
 
     public static class Builder {
 
@@ -71,16 +100,19 @@ public class Game {
             this.dimensions = 0;
         }
 
-        public void setPlayers(List<Player> players) {
+        public Builder setPlayers(List<Player> players) {
             this.players = players;
+            return this;
         }
 
-        public void setWinningstrategylist(List<OrderOneWinningStrategy> winningstrategylist) {
+        public Builder setWinningstrategylist(List<OrderOneWinningStrategy> winningstrategylist) {
             this.winningstrategylist = winningstrategylist;
+            return this;
         }
 
-        public void setDimensions(int dimensions) {
+        public Builder setDimensions(int dimensions) {
             this.dimensions = dimensions;
+            return this;
         }
 
         // we also give methods to add Player and Winning Strategy since both of them are list.
@@ -157,7 +189,8 @@ public class Game {
 
         }
 
-        private Game build(){
+        // this build() method should be public, since we have to call this from the controller
+        public Game build(){
             validate();
             return new Game(players,new Board(dimensions),winningstrategylist);
         }
