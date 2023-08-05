@@ -50,6 +50,7 @@ public class GameController {
 
     // for finding the winner of the game
     public String winnerofgame(Game game){
+
         return game.getWinner().getName();
     }
 
