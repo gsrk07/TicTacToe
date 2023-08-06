@@ -62,10 +62,49 @@ public class OrderOneWinningStrategy implements WinningStrategy {
         return result;
     }
 
+      /*
+            0,0     0,1     0,2
+            1,0     1,1     1,2
+            2,0     2,1     2,2
 
+            row -> 0 || dim-1
+            col -> 0 || dim-1
+     */
 
     @Override
     public Player checkWinner(Board board, Move lastmove) {
+
+        Player lastmovedplayer = lastmove.getPlayer();
+        char symboloflastmovedplayer = lastmovedplayer.getSymbol().getSymbolchar(); // get my symob
+        int row = lastmove.getCell().getRow();
+        int col = lastmove.getCell().getCol();
+
+        if(checkforRows(row,col,symboloflastmovedplayer,lastmove) != null){
+            return lastmovedplayer;
+        }
+
+
+
+
+
         return null;
     }
+
+    private Player checkforRows(int row, int col, char charofsymbol, Move lastmove){
+
+        if(!rowsymbolcount.get(row).containsKey(charofsymbol)){
+            rowsymbolcount.get(row).put(charofsymbol,0);
+        }
+
+        rowsymbolcount.get(row).put(
+                charofsymbol, // key
+                rowsymbolcount.get(row).get(charofsymbol)+1); // value
+
+        if(rowsymbolcount.get(row).get(charofsymbol) == dimension){
+            return lastmove.getPlayer();
+        }
+
+        return null;
+    }
+
 }

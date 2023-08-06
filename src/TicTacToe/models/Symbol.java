@@ -9,7 +9,7 @@ public class Symbol {
     }
 
     // we only give a getter here so that once a symbol is set, we are not allowing to change it.
-    public char getSymbol() {
+    public char getSymbolchar() {
         return symbolchar;
     }
 }
