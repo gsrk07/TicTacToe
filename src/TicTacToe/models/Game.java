@@ -171,7 +171,7 @@ public class Game {
             HashSet<Character> hs = new HashSet<>();
 
             for(Player player : players){
-                hs.add(player.getSymbol().getSymbol());
+                hs.add(player.getSymbol().getSymbolchar());
             }
 
             if(hs.size() != players.size()){

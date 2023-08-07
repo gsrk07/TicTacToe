@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Player {
 
+    private static int idcounter = 0;
     private String name;
 
     private Symbol symbol; // we are making it private and creating a class for Symbol since, i dont want anyone to change it.
@@ -17,10 +18,10 @@ public class Player {
 
     private Scanner scanner; // this is used here to give user input.
 
-    public Player(String name, Symbol symbol, int id, PlayerType playerType) {
+    public Player(String name, Symbol symbol, PlayerType playerType) {
         this.name = name;
         this.symbol = symbol;
-        this.id = id;
+        this.id = idcounter++;
         this.playerType = playerType;
         this.scanner = new Scanner(System.in); // we are not adding Scanner inside constructor since we dont want to create it everytime
     }

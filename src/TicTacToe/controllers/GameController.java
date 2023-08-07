@@ -15,15 +15,15 @@ public class GameController {
     // what all do we need for a game? -- board, list of players, winning strategy if we look at Game class,
     // you can find these things to consider.
 
-    public Game createGame(int dimensions, List<Player> players, List<OrderOneWinningStrategy> winningstrategies) {
+    public Game createGame(int dimensions, List<Player> players /*List<OrderOneWinningStrategy> winningstrategies*/ ) {
 
         // we will write this in a try block as if any exception occurs, it can be catched
 
         try {
 
             return Game.builder().setDimensions(dimensions)
-                                 .setPlayers(players)
-                    .setWinningstrategylist(winningstrategies).build();
+                                 .setPlayers(players)               // here we are as of now passing the winning strategy as we have only one available.
+                                 .setWinningstrategylist(List.of(new OrderOneWinningStrategy(dimensions))).build();
         } catch (Exception e){
             System.out.println("Could not start the game, as something went wrong");
         }
