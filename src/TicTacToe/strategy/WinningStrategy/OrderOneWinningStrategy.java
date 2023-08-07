@@ -1,5 +1,6 @@
 package TicTacToe.strategy.WinningStrategy;
 
+import TicTacToe.exceptions.GameDrawnException;
 import TicTacToe.models.Board;
 import TicTacToe.models.Move;
 import TicTacToe.models.Player;
@@ -74,6 +75,11 @@ public class OrderOneWinningStrategy implements WinningStrategy {
     @Override
     public Player checkWinner(Board board, Move lastmove) {
 
+        symboladdedcount++; // everytime we come to checkwinner, it implies a player has played a move.
+        // and now, that move will have a symbol and it will be added to this count.
+        // also, why we have this variable is, if none of the winning strategies work
+        // and if board gets filled completely, then it results in a draw.
+
         Player lastmovedplayer = lastmove.getPlayer();
         char symboloflastmovedplayer = lastmovedplayer.getSymbol().getSymbolchar(); // get my symob
         int row = lastmove.getCell().getRow();
@@ -92,7 +98,10 @@ public class OrderOneWinningStrategy implements WinningStrategy {
             return lastmovedplayer;
         }
 
-
+        if(symboladdedcount == dimension*dimension){
+            board.printBoard(); // let us print the board
+            throw new GameDrawnException(" Game is drawn as all cells are filled ");
+        }
 
         return null;
     }
@@ -134,7 +143,7 @@ public class OrderOneWinningStrategy implements WinningStrategy {
 
     private Player checkforDiagonalWins(int row, int col, char charofsymbol, Move lastmove){
 
-            if(isCellTopleftdiagonal(row,col){
+            if(isCellTopleftdiagonal(row,col)){
                 if(!topleftdiagonalsymbolcount.containsKey(charofsymbol)){
                     topleftdiagonalsymbolcount.put(charofsymbol,0);
                 }
@@ -183,6 +192,13 @@ public class OrderOneWinningStrategy implements WinningStrategy {
 
     }
 
-
+    //TODO :
+/*
+    Implement 4 classes for Winning Strategy
+    1. RowWinningStrategy
+    2. ColumnWinningStrategy
+    3. DiagonalWinningStrategy
+    4. CornerWinningStrategy
+ */
 
 }
