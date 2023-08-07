@@ -163,6 +163,26 @@ public class OrderOneWinningStrategy implements WinningStrategy {
         return null;
     }
 
+    private Player checkforCornerWins(int row, int col, char symbolofchar, Move lastmove){
+
+        if(isCornerCell(row,col)){
+
+            if(!cornersymbolcount.containsKey(symbolofchar)){
+                cornersymbolcount.put(symbolofchar,0);
+            }
+
+            cornersymbolcount.put(symbolofchar,
+                      cornersymbolcount.get(symbolofchar)+1);
+
+            if(cornersymbolcount.size() == dimension){
+                return lastmove.getPlayer();
+            }
+        }
+
+        return null;
+
+    }
+
 
 
 }
