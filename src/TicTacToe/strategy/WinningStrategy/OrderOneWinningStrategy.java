@@ -20,9 +20,9 @@ public class OrderOneWinningStrategy implements WinningStrategy {
     private List<HashMap<Character,Integer>> rowsymbolcount = new ArrayList<>(); // []
     private List<HashMap<Character,Integer>> colsymbolcount = new ArrayList<>(); // []
 
-    private HashMap<Character,Integer> topleftdiagonalsymbol = new HashMap<>();
+    private HashMap<Character,Integer> topleftdiagonalsymbolcount = new HashMap<>();
 
-    private HashMap<Character,Integer> bottomleftdiagonalsymbol = new HashMap<>();
+    private HashMap<Character,Integer> bottomleftdiagonalsymbolcount = new HashMap<>();
 
     private HashMap<Character,Integer> cornersymbolcount = new HashMap<>();
 
@@ -38,7 +38,7 @@ public class OrderOneWinningStrategy implements WinningStrategy {
 
     // to check for topleftdiagonal
 
-    public boolean isCelltTopleftdiagonal(int row, int col){
+    public boolean isCellTopleftdiagonal(int row, int col){
         return row == col;
     }
 
@@ -82,8 +82,15 @@ public class OrderOneWinningStrategy implements WinningStrategy {
         if(checkforRows(row,col,symboloflastmovedplayer,lastmove) != null){
             return lastmovedplayer;
         }
-
-
+        else if(checkforColumns(row,col,symboloflastmovedplayer,lastmove) != null) {
+            return lastmovedplayer;
+        }
+        else if(checkforDiagonalWins(row,col,symboloflastmovedplayer,lastmove) != null){
+            return lastmovedplayer;
+        }
+        else if(checkforCornerWins(row,col,symboloflastmovedplayer,lastmove) != null){
+            return lastmovedplayer;
+        }
 
 
 
@@ -118,9 +125,40 @@ public class OrderOneWinningStrategy implements WinningStrategy {
                 put(charofsymbol, // key
                     colsymbolcount.get(col).get(charofsymbol)+1); // value to be incremented to the symbol
 
-        if(colsymbolcount.get(col).size() == dimension-1){
+        if(colsymbolcount.get(col).size() == dimension){
             return lastmove.getPlayer();
         }
+
+        return null;
+    }
+
+    private Player checkforDiagonalWins(int row, int col, char charofsymbol, Move lastmove){
+
+            if(isCellTopleftdiagonal(row,col){
+                if(!topleftdiagonalsymbolcount.containsKey(charofsymbol)){
+                    topleftdiagonalsymbolcount.put(charofsymbol,0);
+                }
+
+                topleftdiagonalsymbolcount.put(charofsymbol,
+                        topleftdiagonalsymbolcount.get(charofsymbol)+1);
+
+                if(topleftdiagonalsymbolcount.size() == dimension){
+                    return lastmove.getPlayer();
+                }
+            }
+
+            if(isCellbottomleftdiagonal(row,col)){
+                if(!bottomleftdiagonalsymbolcount.containsKey(charofsymbol)){
+                    bottomleftdiagonalsymbolcount.put(charofsymbol,0);
+                }
+
+                bottomleftdiagonalsymbolcount.put(charofsymbol,
+                        bottomleftdiagonalsymbolcount.get(charofsymbol)+1);
+
+                if(bottomleftdiagonalsymbolcount.size() == dimension){
+                    return lastmove.getPlayer();
+                }
+            }
 
         return null;
     }
