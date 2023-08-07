@@ -15,7 +15,7 @@ public class Bot extends Player{
     }
 
     public Move makeMove(Board board){
-        Move move = botPlayingStrategy.makeMove(board); // since this is a bot, based on playing strategy it will make a move.
+        Move move = botPlayingStrategy.makeMove(this,board); // since this is a bot, based on playing strategy it will make a move.
         move.setPlayer(this); // here we are setting the player. // DOUBT
         return  move;
     }

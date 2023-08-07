@@ -43,7 +43,7 @@ public class Cell {
             System.out.print(" |||| ");
         }
         else {
-            System.out.print(" | " + player.getSymbol().getSymbol() + " | ");
+            System.out.print(" | " + player.getSymbol().getSymbolchar() + " | ");
         }
     }
     public int getRow() {
