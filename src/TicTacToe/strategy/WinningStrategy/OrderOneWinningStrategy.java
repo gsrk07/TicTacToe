@@ -90,6 +90,7 @@ public class OrderOneWinningStrategy implements WinningStrategy {
         return null;
     }
 
+    // we now write the logic for how to check for rows
     private Player checkforRows(int row, int col, char charofsymbol, Move lastmove){
 
         if(!rowsymbolcount.get(row).containsKey(charofsymbol)){
@@ -106,5 +107,24 @@ public class OrderOneWinningStrategy implements WinningStrategy {
 
         return null;
     }
+
+    private Player checkforColumns(int row, int col, char charofsymbol, Move lastmove){
+
+        if(!colsymbolcount.get(col).containsKey(charofsymbol)){
+            colsymbolcount.get(col).put(charofsymbol,0);
+        }
+
+        colsymbolcount.get(col).
+                put(charofsymbol, // key
+                    colsymbolcount.get(col).get(charofsymbol)+1); // value to be incremented to the symbol
+
+        if(colsymbolcount.get(col).size() == dimension-1){
+            return lastmove.getPlayer();
+        }
+
+        return null;
+    }
+
+
 
 }
