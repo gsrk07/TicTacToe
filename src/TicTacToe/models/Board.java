@@ -35,8 +35,6 @@ public class Board {
 
             List<Cell> eachrow = board.get(i);
 
-
-
             for (int j = 0; j < eachrow.size(); j++){
                 eachrow.get(j).display();
             }

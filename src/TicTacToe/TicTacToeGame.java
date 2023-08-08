@@ -4,6 +4,7 @@ import TicTacToe.controllers.GameController;
 import TicTacToe.models.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,6 +35,9 @@ public class TicTacToeGame {
             System.out.println(" What is the character symbol of the Player number " + (i+1));
             String charsymbol = sc.next();
 
+//            System.out.println(charsymbol);
+//            System.out.println(charsymbol.charAt(0));
+
             // inserted player object inside list.
             players.add(new Player(playername,new Symbol(charsymbol.charAt(0)), PlayerType.HUMAN));
 
@@ -54,6 +58,7 @@ public class TicTacToeGame {
 
         }
 
+        Collections.shuffle(players); // randomising the list of players.
 
         Game game = gc.createGame(dimension,players);
 
@@ -61,6 +66,7 @@ public class TicTacToeGame {
 
             System.out.println("Current board status");
             gc.displayBoard(game);
+
 
             gc.executeMove(game);
         }

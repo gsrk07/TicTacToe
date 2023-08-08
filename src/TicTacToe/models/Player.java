@@ -23,7 +23,7 @@ public class Player {
         this.symbol = symbol;
         this.id = idcounter++;
         this.playerType = playerType;
-        this.scanner = new Scanner(System.in); // we are not adding Scanner inside constructor since we dont want to create it everytime
+        this.scanner = new Scanner(System.in); // we are not adding Scanner inside constructor since we don't want to create it everytime
     }
 
     public Move makemove(Board board){
